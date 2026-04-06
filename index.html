@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Aafreen 💞</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #ff6b9d;
+    --soft-pink: #ffb3cc;
+    --purple: #c084fc;
+    --soft-purple: #e9d5ff;
+    --lavender: #ddd6fe;
+    --deep-purple: #7c3aed;
+    --rose: #fb7185;
+    --bg-dark: #0f0a1e;
+    --bg-mid: #1e1033;
+    --text-light: #fdf4ff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    cursor: default;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor {
+    width: 18px; height: 18px;
+    border: 2px solid var(--pink);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform .15s ease, background .2s;
+  }
+  .cursor.click { background: rgba(255,107,157,.4); transform: translate(-50%,-50%) scale(1.8); }
+
+  /* ── FLOATING HEARTS BG ── */
+  .bg-hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .bg-heart {
+    position: absolute;
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    bottom: -40px;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10%  { opacity: .35; }
+    90%  { opacity: .15; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── SPARKLE ── */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.1rem;
+    animation: sparkleAnim .8s ease forwards;
+    z-index: 9000;
+  }
+  @keyframes sparkleAnim {
+    0%   { transform: scale(0) rotate(0deg); opacity: 1; }
+    60%  { transform: scale(1.4) rotate(180deg); opacity: 1; }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+  }
+
+  /* ── SCREENS ── */
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .8s ease;
+    z-index: 10;
+    text-align: center;
+  }
+  .screen.active { opacity: 1; pointer-events: all; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    background: linear-gradient(135deg, var(--pink), var(--purple));
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: .85rem 2.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 30px rgba(255,107,157,.4);
+    transition: transform .2s, box-shadow .2s;
+    margin-top: 1.5rem;
+    letter-spacing: .5px;
+  }
+  .btn:hover { transform: scale(1.06); box-shadow: 0 6px 40px rgba(255,107,157,.6); }
+  .btn:active { transform: scale(.97); }
+
+  /* ── TITLES ── */
+  .display-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    background: linear-gradient(135deg, #ffb3cc, #e9d5ff, #fb7185);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.3;
+    margin-bottom: .8rem;
+  }
+  .subtitle {
+    font-size: clamp(.85rem, 2.5vw, 1.05rem);
+    color: #e9d5ff;
+    line-height: 1.8;
+    font-weight: 300;
+    max-width: 480px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--purple), var(--rose));
+    transition: width .6s ease;
+    z-index: 999;
+    box-shadow: 0 0 10px var(--pink);
+  }
+
+  /* ── LEVEL BADGE ── */
+  #level-badge {
+    position: fixed;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,183,204,.3);
+    border-radius: 50px;
+    padding: .3rem 1.2rem;
+    font-size: .75rem;
+    letter-spacing: 2px;
+    color: var(--soft-pink);
+    z-index: 998;
+    display: none;
+    backdrop-filter: blur(8px);
+  }
+
+  /* ── MUTE BUTTON ── */
+  #mute-btn {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,183,204,.4);
+    border-radius: 50%;
+    width: 46px; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 999;
+    backdrop-filter: blur(8px);
+    transition: background .2s, transform .2s;
+  }
+  #mute-btn:hover { background: rgba(255,107,157,.2); transform: scale(1.1); }
+
+  /* ════════════════════════════
+     SCREEN 0 – ENTRY
+  ════════════════════════════ */
+  #s0 {
+    background: radial-gradient(ellipse at center, #2d1257 0%, #0f0a1e 70%);
+  }
+  #s0 .moon { font-size: 3.5rem; margin-bottom: 1rem; animation: pulse 3s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+
+  /* ════════════════════════════
+     LEVEL 1 – FIND HEARTS
+  ════════════════════════════ */
+  #s1 { background: radial-gradient(ellipse at center, #1e0936 0%, #0f0a1e 70%); }
+  .clickable-heart {
+    position: absolute;
+    font-size: 2.2rem;
+    cursor: pointer;
+    animation: floatHeart 3s ease-in-out infinite;
+    transition: transform .2s;
+    filter: drop-shadow(0 0 8px rgba(255,107,157,.6));
+    z-index: 20;
+    user-select: none;
+  }
+  .clickable-heart:hover { transform: scale(1.3); }
+  .clickable-heart.collected {
+    animation: collectHeart .4s ease forwards;
+    pointer-events: none;
+  }
+  @keyframes floatHeart {
+    0%,100%{transform:translateY(0) rotate(-5deg);}
+    50%{transform:translateY(-14px) rotate(5deg);}
+  }
+  @keyframes collectHeart {
+    0%{transform:scale(1);opacity:1;}
+    100%{transform:scale(3) translateY(-40px);opacity:0;}
+  }
+  .heart-msg {
+    position: fixed;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #fff;
+    pointer-events: none;
+    z-index: 8000;
+    animation: msgFloat 2s ease forwards;
+    white-space: nowrap;
+  }
+  @keyframes msgFloat {
+    0%  { opacity:0; transform:translateY(0) scale(.8); }
+    20% { opacity:1; transform:translateY(-10px) scale(1); }
+    80% { opacity:1; transform:translateY(-30px) scale(1); }
+    100%{ opacity:0; transform:translateY(-60px) scale(.9); }
+  }
+  #hearts-counter {
+    position: absolute;
+    top: 70px;
+    font-size: .85rem;
+    color: var(--soft-pink);
+    letter-spacing: 2px;
+  }
+
+  /* ════════════════════════════
+     LEVEL 2 – GIFT BOXES
+  ════════════════════════════ */
+  #s2 { background: radial-gradient(ellipse at 30% 40%, #2d1257 0%, #0f0a1e 70%); }
+  .boxes-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 2rem; }
+  .gift-box {
+    width: 110px; height: 110px;
+    background: linear-gradient(135deg, rgba(255,107,157,.2), rgba(192,132,252,.2));
+    border: 2px solid rgba(255,183,204,.4);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+  .gift-box:hover { transform: scale(1.08) rotate(-2deg); box-shadow: 0 8px 30px rgba(255,107,157,.4); }
+  .gift-box.opened { animation: openBox .5s ease forwards; cursor: default; }
+  @keyframes openBox {
+    0%{transform:scale(1);}
+    40%{transform:scale(1.2) rotate(5deg);}
+    100%{transform:scale(1) rotate(0deg);}
+  }
+  .gift-box .box-message {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,107,157,.9), rgba(192,132,252,.9));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Dancing Script', cursive;
+    font-size: .9rem;
+    color: #fff;
+    padding: .6rem;
+    line-height: 1.4;
+    opacity: 0;
+    transition: opacity .4s;
+    border-radius: 18px;
+    text-align: center;
+  }
+  .gift-box.opened .box-message { opacity: 1; }
+  .gift-box.opened .box-icon { display: none; }
+
+  /* ════════════════════════════
+     LEVEL 3 – CHOOSE
+  ════════════════════════════ */
+  #s3 { background: radial-gradient(ellipse at 70% 60%, #1e0936 0%, #0f0a1e 70%); }
+  .feel-grid { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; max-width: 500px; }
+  .feel-btn {
+    background: rgba(255,255,255,.07);
+    border: 1.5px solid rgba(255,183,204,.35);
+    border-radius: 50px;
+    padding: .75rem 1.6rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    color: #e9d5ff;
+    cursor: pointer;
+    transition: all .2s;
+    backdrop-filter: blur(8px);
+  }
+  .feel-btn:hover { background: rgba(255,107,157,.2); transform: scale(1.05); border-color: var(--pink); color: #fff; }
+  .feel-btn.selected { background: linear-gradient(135deg, var(--pink), var(--purple)); color: #fff; border-color: transparent; }
+  #feel-response {
+    margin-top: 1.5rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #fdf4ff;
+    min-height: 80px;
+    line-height: 1.6;
+    opacity: 0;
+    transition: opacity .5s;
+    max-width: 440px;
+  }
+  #feel-response.show { opacity: 1; }
+
+  /* ════════════════════════════
+     LEVEL 4 – HOLD MY HAND
+  ════════════════════════════ */
+  #s4 { background: radial-gradient(ellipse at center, #200840 0%, #0f0a1e 70%); }
+  #hand-btn {
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,157,.2), rgba(192,132,252,.1));
+    border: 2px solid rgba(255,183,204,.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 2rem;
+    position: relative;
+    animation: breathe 3s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100%{box-shadow:0 0 20px rgba(255,107,157,.3),0 0 60px rgba(255,107,157,.1);}
+    50%{box-shadow:0 0 40px rgba(255,107,157,.6),0 0 100px rgba(255,107,157,.25);}
+  }
+  #hand-btn:hover { transform: scale(1.08); }
+  #hand-btn.held {
+    animation: heartbeat .5s ease-in-out infinite, glowPulse 1s ease-in-out infinite;
+    border-color: var(--pink);
+  }
+  @keyframes heartbeat {
+    0%,100%{transform:scale(1);}
+    25%{transform:scale(1.12);}
+    50%{transform:scale(.95);}
+    75%{transform:scale(1.08);}
+  }
+  @keyframes glowPulse {
+    0%,100%{box-shadow:0 0 40px rgba(255,107,157,.6),0 0 80px rgba(255,107,157,.3);}
+    50%{box-shadow:0 0 60px rgba(255,107,157,.9),0 0 120px rgba(255,107,157,.5),0 0 200px rgba(255,107,157,.2);}
+  }
+  #hand-message { margin-top: 1.5rem; font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: #fdf4ff; opacity: 0; transition: opacity .8s; max-width: 380px; line-height: 1.7; }
+  #hand-message.show { opacity: 1; }
+
+  /* ════════════════════════════
+     LEVEL 5 – MEMORY SKY
+  ════════════════════════════ */
+  #s5 {
+    background: radial-gradient(ellipse at center, #0a0520 0%, #000510 70%);
+    overflow: hidden;
+  }
+  .sky-star {
+    position: absolute;
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: transform .2s, filter .2s;
+    animation: twinkle linear infinite;
+    z-index: 20;
+    user-select: none;
+  }
+  .sky-star:hover { transform: scale(1.5); filter: drop-shadow(0 0 10px gold); }
+  @keyframes twinkle {
+    0%,100%{opacity:.6;} 50%{opacity:1;}
+  }
+  .star-msg {
+    position: fixed;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: #fff9c4;
+    pointer-events: none;
+    z-index: 8000;
+    animation: starMsgAnim 2.5s ease forwards;
+    text-shadow: 0 0 20px gold;
+    white-space: nowrap;
+  }
+  @keyframes starMsgAnim {
+    0%{opacity:0;transform:translateY(0) scale(.7);}
+    20%{opacity:1;transform:translateY(-8px) scale(1);}
+    80%{opacity:1;transform:translateY(-20px) scale(1);}
+    100%{opacity:0;transform:translateY(-50px) scale(.9);}
+  }
+  #sky-hint { position: absolute; bottom: 90px; font-size: .8rem; color: rgba(255,255,255,.4); letter-spacing: 2px; }
+
+  /* ════════════════════════════
+     BONUS – SHAYARI SCREENS
+  ════════════════════════════ */
+  #s-unlock {
+    background: radial-gradient(ellipse at center, #2d1257 0%, #0f0a1e 70%);
+  }
+  .unlock-icon { font-size: 4rem; margin-bottom: 1rem; animation: unlockPop .6s ease; }
+  @keyframes unlockPop {
+    0%{transform:scale(0) rotate(-20deg);}
+    70%{transform:scale(1.2) rotate(5deg);}
+    100%{transform:scale(1) rotate(0deg);}
+  }
+
+  /* SHAYARI 1 – WHISPER */
+  #sh1 { background: #050212; }
+  #sh1-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: #e9d5ff;
+    text-shadow: 0 0 30px rgba(192,132,252,.6), 0 0 60px rgba(192,132,252,.3);
+    line-height: 1.8;
+    min-height: 80px;
+    max-width: 560px;
+  }
+  #sh1-cursor {
+    display: inline-block;
+    width: 2px; height: 1.2em;
+    background: var(--purple);
+    animation: blink .7s step-end infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+  @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+
+  /* SHAYARI 2 – HIDDEN REVEAL */
+  #sh2 { background: radial-gradient(ellipse at center, #1a0530 0%, #050212 70%); }
+  .reveal-hearts { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin: 1.5rem 0; max-width: 400px; }
+  .reveal-heart {
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform .2s;
+    animation: floatHeart 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(255,107,157,.5));
+  }
+  .reveal-heart:hover { transform: scale(1.3); }
+  .reveal-heart.revealed { animation: revealPop .4s ease forwards; pointer-events: none; }
+  @keyframes revealPop { 0%{transform:scale(1);}50%{transform:scale(1.5);}100%{transform:scale(0);opacity:0;} }
+  #sh2-lines { font-family: 'Dancing Script', cursive; font-size: clamp(1rem,3vw,1.5rem); line-height: 2; color: #fdf4ff; min-height: 140px; }
+  .sh2-line { opacity:0; transform:translateY(10px); transition:opacity .6s, transform .6s; }
+  .sh2-line.show { opacity:1; transform:translateY(0); }
+
+  /* SHAYARI 3 – FLOATING WORDS */
+  #sh3 { background: radial-gradient(ellipse at 40% 30%, #0f0530 0%, #020110 70%); }
+  .floating-words { position: relative; width: 100%; height: 200px; margin: 1rem 0; }
+  .float-word {
+    position: absolute;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    color: rgba(255,183,204,.7);
+    cursor: pointer;
+    animation: wordFloat linear infinite;
+    transition: all .3s;
+    white-space: nowrap;
+  }
+  .float-word:hover { color: #fff; transform: scale(1.1); }
+  @keyframes wordFloat {
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-12px);}
+  }
+  #sh3-full {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.1rem,3.5vw,1.6rem);
+    line-height: 1.9;
+    color: #fdf4ff;
+    opacity: 0;
+    transition: opacity 1s;
+    max-width: 500px;
+    text-shadow: 0 0 20px rgba(255,107,157,.4);
+  }
+  #sh3-full.show { opacity: 1; }
+
+  /* SHAYARI 4 – CLIMAX */
+  #sh4 {
+    background: #000;
+    overflow: hidden;
+  }
+  #sh4-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(255,107,157,.15) 0%, rgba(192,132,252,.08) 40%, transparent 70%);
+    animation: bgGrow 4s ease-in-out infinite;
+  }
+  @keyframes bgGrow {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.3);}
+  }
+  #sh4-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    line-height: 1.9;
+    color: #fff;
+    text-shadow: 0 0 40px rgba(255,107,157,.8), 0 0 80px rgba(255,107,157,.4);
+    animation: zoomIn 1.5s ease, textGlow 2s ease-in-out 1.5s infinite;
+    max-width: 560px;
+    position: relative;
+    z-index: 2;
+  }
+  @keyframes zoomIn { 0%{transform:scale(.7);opacity:0;}100%{transform:scale(1);opacity:1;} }
+  @keyframes textGlow {
+    0%,100%{text-shadow:0 0 40px rgba(255,107,157,.8),0 0 80px rgba(255,107,157,.4);}
+    50%{text-shadow:0 0 60px rgba(255,107,157,1),0 0 120px rgba(255,107,157,.7),0 0 200px rgba(192,132,252,.4);}
+  }
+  .sh4-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,107,157,.2);
+    animation: ringExpand 3s ease-out infinite;
+    pointer-events: none;
+  }
+  @keyframes ringExpand {
+    0%{transform:translate(-50%,-50%) scale(0);opacity:.8;}
+    100%{transform:translate(-50%,-50%) scale(4);opacity:0;}
+  }
+
+  /* ════════════════════════════
+     FINAL SCREEN
+  ════════════════════════════ */
+  #s-final {
+    background: radial-gradient(ellipse at center, #2d1257 0%, #0f0a1e 70%);
+  }
+  .final-hearts { font-size: 2rem; animation: heartRain 1s ease-out; margin-bottom: 1rem; }
+  @keyframes heartRain { 0%{opacity:0;transform:scale(.5);}100%{opacity:1;transform:scale(1);} }
+
+  /* ── NOTIFICATION TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 80px; left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(255,107,157,.15);
+    border: 1px solid rgba(255,183,204,.4);
+    border-radius: 50px;
+    padding: .5rem 1.5rem;
+    font-size: .85rem;
+    color: #fdf4ff;
+    opacity: 0;
+    transition: opacity .4s, transform .4s;
+    z-index: 9990;
+    backdrop-filter: blur(10px);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── CONFETTI ── */
+  .confetti-piece {
+    position: fixed;
+    top: -10px;
+    pointer-events: none;
+    z-index: 9500;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%{transform:translateY(0) rotate(0deg);opacity:1;}
+    100%{transform:translateY(110vh) rotate(720deg);opacity:0;}
+  }
+
+  /* ── NEXT BUTTON BAR ── */
+  .bottom-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+  }
+
+  /* Responsive */
+  @media(max-width:480px) {
+    .gift-box { width: 85px; height: 85px; font-size: 2.2rem; }
+    .boxes-grid { gap: 1rem; }
+    #hand-btn { width: 150px; height: 150px; font-size: 3rem; }
+    .feel-btn { padding: .65rem 1.2rem; font-size: .8rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- Floating BG hearts -->
+<div class="bg-hearts" id="bg-hearts"></div>
+
+<!-- Progress bar -->
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- Level badge -->
+<div id="level-badge">LEVEL 1</div>
+
+<!-- Mute -->
+<button id="mute-btn" title="Mute/Unmute">🔊</button>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 0 – ENTRY
+══════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+  <div class="moon">🌙</div>
+  <div class="display-title">Hey Aafreen… 🥺</div>
+  <p class="subtitle">
+    Mujhe pata hai tum aaj thodi upset ho…<br>
+    Isliye maine tumhare liye kuch special banaya hai… 💞
+  </p>
+  <button class="btn" onclick="goTo('s1')">Start this little journey 💖</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 1 – FIND HEARTS (LEVEL 1)
+══════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="display-title">Find the Hearts 💞</div>
+  <p class="subtitle">Tap all the floating hearts, my love…</p>
+  <div id="hearts-counter">0 / 5 collected</div>
+  <!-- hearts injected by JS -->
+  <div class="bottom-bar" id="s1-next" style="display:none">
+    <button class="btn" onclick="goTo('s2')">Next Level ✨</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 2 – GIFT BOXES (LEVEL 2)
+══════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="display-title">Open Your Gifts 🎁</div>
+  <p class="subtitle">Each box has something special just for you…</p>
+  <div class="boxes-grid">
+    <div class="gift-box" onclick="openBox(this, 'You mean everything to me 💞')">
+      <span class="box-icon">🎁</span>
+      <div class="box-message"></div>
+    </div>
+    <div class="gift-box" onclick="openBox(this, 'Tum meri peace ho 🌙')">
+      <span class="box-icon">🎀</span>
+      <div class="box-message"></div>
+    </div>
+    <div class="gift-box" onclick="openBox(this, 'Mera din tumse hi complete hota hai 🥺')">
+      <span class="box-icon">💝</span>
+      <div class="box-message"></div>
+    </div>
+    <div class="gift-box" onclick="openBox(this, 'Main hamesha tumhare saath hoon 🫀')">
+      <span class="box-icon">🌸</span>
+      <div class="box-message"></div>
+    </div>
+  </div>
+  <div class="bottom-bar" id="s2-next" style="display:none">
+    <button class="btn" onclick="goTo('s3')">Continue 💖</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 3 – CHOOSE (LEVEL 3)
+══════════════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="display-title">Tell me… how do you feel? 🌸</div>
+  <p class="subtitle">I'm here to listen, always…</p>
+  <div class="feel-grid">
+    <button class="feel-btn" onclick="chooseFeel(this, 'sad')">I feel sad 😔</button>
+    <button class="feel-btn" onclick="chooseFeel(this, 'alone')">I feel alone 💔</button>
+    <button class="feel-btn" onclick="chooseFeel(this, 'miss')">I miss you 🥺</button>
+    <button class="feel-btn" onclick="chooseFeel(this, 'hug')">I need a hug 🤍</button>
+  </div>
+  <div id="feel-response"></div>
+  <div class="bottom-bar" id="s3-next" style="display:none">
+    <button class="btn" onclick="goTo('s4')">Hold on… 🤍</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 4 – HOLD MY HAND (LEVEL 4)
+══════════════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="display-title">Hold my hand… 🤍</div>
+  <p class="subtitle">Close your eyes… and just feel this…</p>
+  <div id="hand-btn" onclick="holdHand()">🤍</div>
+  <div id="hand-message">Mera baccha… main yahin hoon… kahin nahi ja raha… 🥺💞</div>
+  <div class="bottom-bar" id="s4-next" style="display:none">
+    <button class="btn" onclick="goTo('s5')">Take me somewhere beautiful ✨</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCREEN 5 – MEMORY SKY (LEVEL 5)
+══════════════════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="display-title" style="position:relative;z-index:21;">Memory Sky ⭐</div>
+  <p class="subtitle" style="position:relative;z-index:21;">Touch the stars… each one holds a secret 🌌</p>
+  <!-- stars injected by JS -->
+  <div id="sky-hint">✨ tap the stars ✨</div>
+  <div class="bottom-bar" id="s5-next" style="display:none;z-index:30;">
+    <button class="btn" onclick="goTo('s-unlock')">Something special awaits… 💌</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     UNLOCK SCREEN
+══════════════════════════════════════════ -->
+<div class="screen" id="s-unlock">
+  <div class="unlock-icon">💌</div>
+  <div class="display-title">You unlocked something special…</div>
+  <p class="subtitle">These words… tumhare liye… dil ki geherai se… 🥀</p>
+  <button class="btn" onclick="goTo('sh1')">Open your heart 💖</button>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHAYARI 1 – WHISPER MODE
+══════════════════════════════════════════ -->
+<div class="screen" id="sh1">
+  <div class="display-title" style="font-size:1.5rem;margin-bottom:2rem;">✨ Whisper from my heart…</div>
+  <div id="sh1-text"></div><span id="sh1-cursor"></span>
+  <div class="bottom-bar" id="sh1-next" style="display:none">
+    <button class="btn" onclick="goTo('sh2')">Next shayari 💖</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHAYARI 2 – HIDDEN REVEAL
+══════════════════════════════════════════ -->
+<div class="screen" id="sh2">
+  <div class="display-title" style="font-size:1.5rem;">💖 Tap hearts to reveal…</div>
+  <div class="reveal-hearts" id="sh2-hearts"></div>
+  <div id="sh2-lines">
+    <div class="sh2-line" id="sh2-l0">Tu door hai magar dil ke bahut paas hai… 💖🌍</div>
+    <div class="sh2-line" id="sh2-l1">Tera pyaar mere liye bahut hi khaas hai… 🫀✨</div>
+    <div class="sh2-line" id="sh2-l2">Har lamha tujhe yaad karte hain… 🥺💭</div>
+    <div class="sh2-line" id="sh2-l3">Kyunki tu hi meri har khushi ka ehsaas hai… 💞🌸</div>
+  </div>
+  <div class="bottom-bar" id="sh2-next" style="display:none">
+    <button class="btn" onclick="goTo('sh3')">One more… 🌙</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHAYARI 3 – FLOATING WORDS
+══════════════════════════════════════════ -->
+<div class="screen" id="sh3">
+  <div class="display-title" style="font-size:1.4rem;">🌙 Tap to bring it together…</div>
+  <div class="floating-words" id="sh3-words"></div>
+  <div id="sh3-full">
+    Khwahish itni hai ki… 🌙💭<br>
+    Kuch aisa mera naseeb ho… ✨🍀<br>
+    Waqt chahe jaisa bhi ho… ⏳🥀<br>
+    Bas tum mere kareeb ho… 💞🫶
+  </div>
+  <div class="bottom-bar" id="sh3-next" style="display:none">
+    <button class="btn" onclick="goTo('sh4')">Final surprise… 💞</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SHAYARI 4 – CLIMAX
+══════════════════════════════════════════ -->
+<div class="screen" id="sh4">
+  <div id="sh4-bg"></div>
+  <div class="sh4-ring" style="width:300px;height:300px;top:50%;left:50%;animation-delay:0s;"></div>
+  <div class="sh4-ring" style="width:300px;height:300px;top:50%;left:50%;animation-delay:1s;"></div>
+  <div class="sh4-ring" style="width:300px;height:300px;top:50%;left:50%;animation-delay:2s;"></div>
+  <div id="sh4-text">
+    Mann karta hai tumhe nazar mein basa loon… 👀💖<br>
+    Auron ki nazron se tumhe bacha loon… 🥀🫀<br>
+    Kahin chura na le tumhe mujhse koi… 😣✨<br>
+    Aao tumhe main apni dhadkan mein chhupa loon… 💞🫶
+  </div>
+  <div class="bottom-bar" style="z-index:30">
+    <button class="btn" onclick="goTo('s-final')" style="margin-top:2rem;">Our ending… 🥺💞</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     FINAL SCREEN
+══════════════════════════════════════════ -->
+<div class="screen" id="s-final">
+  <div class="final-hearts">💞💖💝💗💓</div>
+  <div class="display-title">Aafreen… tum meri jaan ho… 🥺💞</div>
+  <p class="subtitle">
+    Aur main tumhe kabhi akela feel nahi hone dunga…<br><br>
+    Har baar jab tum upset ho… yaad rakhna…<br>
+    <em>main yahin hoon… hamesha… 🫀</em>
+  </p>
+  <button class="btn" onclick="playAgain()">Play again 💖</button>
+</div>
+
+<!-- ══════════════ AUDIO ══════════════ -->
+<audio id="bg-music" loop>
+  <!-- Using a gentle tone-based audio via Web Audio API below -->
+</audio>
+
+<script>
+// ══════════════════════════════════════════
+//  CURSOR
+// ══════════════════════════════════════════
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top  = e.clientY + 'px';
+});
+document.addEventListener('mousedown', () => { cursor.classList.add('click'); spawnSparkle(event.clientX, event.clientY); });
+document.addEventListener('mouseup',   () => cursor.classList.remove('click'));
+document.addEventListener('touchmove', e => {
+  const t = e.touches[0];
+  cursor.style.left = t.clientX+'px'; cursor.style.top = t.clientY+'px';
+}, {passive:true});
+
+// ══════════════════════════════════════════
+//  SPARKLE
+// ══════════════════════════════════════════
+function spawnSparkle(x, y) {
+  const icons = ['✨','💫','⭐','🌟','💕','🌸','💞'];
+  const el = document.createElement('div');
+  el.className = 'sparkle';
+  el.textContent = icons[Math.floor(Math.random()*icons.length)];
+  el.style.left = (x - 10) + 'px';
+  el.style.top  = (y - 10) + 'px';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 900);
+}
+
+// ══════════════════════════════════════════
+//  FLOATING BG HEARTS
+// ══════════════════════════════════════════
+const bgHearts = document.getElementById('bg-hearts');
+const heartEmojis = ['💞','💕','🩷','💗','💓','🌸','✨','💫'];
+function createBgHeart() {
+  const el = document.createElement('div');
+  el.className = 'bg-heart';
+  el.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+  el.style.left = Math.random()*100 + 'vw';
+  el.style.fontSize = (.8 + Math.random()*.9) + 'rem';
+  const dur = 8 + Math.random()*12;
+  el.style.animationDuration = dur + 's';
+  el.style.animationDelay = Math.random()*dur + 's';
+  bgHearts.appendChild(el);
+  setTimeout(() => el.remove(), (dur+2)*1000);
+}
+setInterval(createBgHeart, 600);
+for(let i=0;i<8;i++) createBgHeart();
+
+// ══════════════════════════════════════════
+//  AUDIO – Web Audio API (soft ambient)
+// ══════════════════════════════════════════
+let audioCtx, masterGain, isMuted = false;
+const muteBtn = document.getElementById('mute-btn');
+
+function initAudio() {
+  if (audioCtx) return;
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = .18;
+  masterGain.connect(audioCtx.destination);
+  playAmbient();
+}
+
+function playAmbient() {
+  // Gentle chord arpeggios — romantic & soft
+  const notes = [261.63, 329.63, 392.00, 493.88, 523.25, 659.25, 783.99]; // C major pentatonic-ish
+  let t = audioCtx.currentTime;
+
+  function scheduleNote(freq, when, dur) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0, when);
+    gain.gain.linearRampToValueAtTime(.35, when + .05);
+    gain.gain.exponentialRampToValueAtTime(.001, when + dur);
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.start(when);
+    osc.stop(when + dur + .1);
+  }
+
+  // Soft pad
+  function pad(freq, when) {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = freq / 2;
+    gain.gain.setValueAtTime(0, when);
+    gain.gain.linearRampToValueAtTime(.12, when + 1);
+    gain.gain.linearRampToValueAtTime(.08, when + 4);
+    gain.gain.linearRampToValueAtTime(0, when + 6);
+    osc.connect(gain);
+    gain.connect(masterGain);
+    osc.start(when);
+    osc.stop(when + 7);
+  }
+
+  // Loop melody pattern
+  const pattern = [0, 2, 4, 6, 4, 2, 1, 3, 5, 3, 1, 0];
+  function scheduleLoop(startTime) {
+    pad(notes[0], startTime);
+    pad(notes[4], startTime + 3);
+    for (let i = 0; i < pattern.length; i++) {
+      const freq = notes[pattern[i]];
+      scheduleNote(freq, startTime + i * .55, 1.1);
+      if(i % 4 === 0) scheduleNote(freq * 1.5, startTime + i * .55 + .28, .8);
+    }
+    const loopDur = pattern.length * .55 + 1;
+    if (!isMuted) {
+      const timeout = (startTime - audioCtx.currentTime + loopDur - .1) * 1000;
+      setTimeout(() => { scheduleLoop(audioCtx.currentTime + .05); }, Math.max(0, timeout));
+    } else {
+      // retry after unmute
+      setTimeout(() => {
+        if(!isMuted) scheduleLoop(audioCtx.currentTime + .05);
+      }, 500);
+    }
+  }
+  scheduleLoop(t + .1);
+}
+
+muteBtn.addEventListener('click', () => {
+  isMuted = !isMuted;
+  if (audioCtx) {
+    masterGain.gain.linearRampToValueAtTime(isMuted ? 0 : .18, audioCtx.currentTime + .3);
+    if(!isMuted) scheduleLoop(audioCtx.currentTime + .05);
+  }
+  muteBtn.textContent = isMuted ? '🔇' : '🔊';
+});
+
+// Init on first interaction
+document.addEventListener('click', initAudio, {once:true});
+document.addEventListener('touchstart', initAudio, {once:true, passive:true});
+
+// ══════════════════════════════════════════
+//  SCREEN NAVIGATION
+// ══════════════════════════════════════════
+const screenOrder = ['s0','s1','s2','s3','s4','s5','s-unlock','sh1','sh2','sh3','sh4','s-final'];
+const progressMap  = {'s0':0,'s1':8,'s2':22,'s3':38,'s4':54,'s5':65,'s-unlock':70,'sh1':78,'sh2':84,'sh3':90,'sh4':96,'s-final':100};
+const levelMap     = {'s1':'LEVEL 1','s2':'LEVEL 2','s3':'LEVEL 3','s4':'LEVEL 4','s5':'LEVEL 5','s-unlock':'BONUS','sh1':'SHAYARI I','sh2':'SHAYARI II','sh3':'SHAYARI III','sh4':'SHAYARI IV'};
+let currentScreen = 's0';
+
+function goTo(id) {
+  document.getElementById(currentScreen).classList.remove('active');
+  document.getElementById(id).classList.add('active');
+  currentScreen = id;
+  // progress
+  const prog = progressMap[id] || 0;
+  document.getElementById('progress-bar').style.width = prog + '%';
+  // badge
+  const badge = document.getElementById('level-badge');
+  if (levelMap[id]) { badge.style.display='block'; badge.textContent = levelMap[id]; }
+  else badge.style.display='none';
+  // screen inits
+  if (id==='s1') initLevel1();
+  if (id==='s2') initLevel2();
+  if (id==='s5') initLevel5();
+  if (id==='sh1') startShayari1();
+  if (id==='sh2') initShayari2();
+  if (id==='sh3') initShayari3();
+  if (id==='s-final') launchConfetti();
+}
+
+// ══════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ══════════════════════════════════════════
+//  LEVEL 1 – CLICK HEARTS
+// ══════════════════════════════════════════
+const heartMessages = [
+  "I'm here 🤍",
+  "You're not alone 🫀",
+  "Breathe… I got you 🌸",
+  "Mera baccha… sab theek ho jayega 🥺",
+  "You are so loved 💞"
+];
+let heartsCollected = 0;
+const totalHearts = 5;
+
+function initLevel1() {
+  heartsCollected = 0;
+  document.getElementById('hearts-counter').textContent = `0 / ${totalHearts} collected`;
+  document.getElementById('s1-next').style.display = 'none';
+  // clear old hearts
+  document.querySelectorAll('.clickable-heart').forEach(h=>h.remove());
+  const s1 = document.getElementById('s1');
+  const positions = [
+    {top:'20%',left:'15%'},{top:'30%',left:'75%'},{top:'55%',left:'20%'},
+    {top:'60%',left:'70%'},{top:'40%',left:'50%'}
+  ];
+  positions.forEach((pos, i) => {
+    const el = document.createElement('div');
+    el.className = 'clickable-heart';
+    el.textContent = ['💞','💕','🩷','💗','💓'][i];
+    el.style.top = pos.top; el.style.left = pos.left;
+    el.style.animationDelay = (i * .4) + 's';
+    el.addEventListener('click', function(e) { collectHeart(this, i, e); });
+    el.addEventListener('touchstart', function(e) { collectHeart(this, i, e.touches[0]); }, {passive:true});
+    s1.appendChild(el);
+  });
+}
+
+function collectHeart(el, idx, e) {
+  if (el.classList.contains('collected')) return;
+  el.classList.add('collected');
+  heartsCollected++;
+  document.getElementById('hearts-counter').textContent = `${heartsCollected} / ${totalHearts} collected`;
+  // floating msg
+  const msg = document.createElement('div');
+  msg.className = 'heart-msg';
+  msg.textContent = heartMessages[idx];
+  msg.style.left = (e.clientX||e.pageX) - 80 + 'px';
+  msg.style.top  = (e.clientY||e.pageY) - 20 + 'px';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2200);
+  spawnSparkle(e.clientX||e.pageX, e.clientY||e.pageY);
+  if (heartsCollected >= totalHearts) {
+    setTimeout(() => {
+      showToast('All hearts collected! 💞');
+      document.getElementById('s1-next').style.display = 'block';
+    }, 600);
+  }
+}
+
+// ══════════════════════════════════════════
+//  LEVEL 2 – GIFT BOXES
+// ══════════════════════════════════════════
+let boxesOpened = 0;
+function initLevel2() { boxesOpened = 0; document.getElementById('s2-next').style.display='none'; }
+
+function openBox(el, message) {
+  if (el.classList.contains('opened')) return;
+  el.classList.add('opened');
+  el.querySelector('.box-message').textContent = message;
+  boxesOpened++;
+  spawnSparkle(el.getBoundingClientRect().left + 55, el.getBoundingClientRect().top + 55);
+  if (boxesOpened >= 4) {
+    setTimeout(() => {
+      showToast('All gifts opened! 🎁💞');
+      document.getElementById('s2-next').style.display='block';
+    }, 600);
+  }
+}
+
+// ══════════════════════════════════════════
+//  LEVEL 3 – CHOOSE FEEL
+// ══════════════════════════════════════════
+const feelResponses = {
+  sad:  "Arey mera pyaar… udaas mat ho… Main hoon na tumhare liye… har pal, har waqt 🥺💞",
+  alone:"Tum kabhi akeli nahi ho Aafreen… Mera dil hamesha tumhare saath rehta hai… dil se dil tak 🫀💕",
+  miss: "Main bhi tumhe bahut miss karta hoon… itna ki words kam pad jaate hain… 🌙💞",
+  hug:  "Aao… imagine karo… main tumhe bahut pyaar se hug kar raha hoon… aur ja nahi raha… 🤍🥺"
+};
+
+function chooseFeel(btn, type) {
+  document.querySelectorAll('.feel-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const resp = document.getElementById('feel-response');
+  resp.textContent = feelResponses[type];
+  resp.classList.remove('show');
+  void resp.offsetWidth;
+  resp.classList.add('show');
+  setTimeout(() => { document.getElementById('s3-next').style.display='block'; }, 1200);
+}
+
+// ══════════════════════════════════════════
+//  LEVEL 4 – HOLD MY HAND
+// ══════════════════════════════════════════
+function holdHand() {
+  const btn = document.getElementById('hand-btn');
+  const msg = document.getElementById('hand-message');
+  btn.classList.add('held');
+  btn.textContent = '💗';
+  msg.classList.add('show');
+  spawnSparkle(btn.getBoundingClientRect().left+90, btn.getBoundingClientRect().top+90);
+  setTimeout(() => { document.getElementById('s4-next').style.display='block'; }, 1500);
+}
+
+// ══════════════════════════════════════════
+//  LEVEL 5 – MEMORY SKY
+// ══════════════════════════════════════════
+const starMessages = [
+  "You are enough 💖",
+  "Main hoon na 🫀",
+  "Tum meri peace ho 🌸",
+  "I love you endlessly 💞",
+  "Tum bahut special ho 🌟",
+  "Har roz tumse pyaar barhta hai 🥺",
+  "Meri duniya ho tum 💕",
+];
+let starsClicked = 0;
+
+function initLevel5() {
+  starsClicked = 0;
+  document.getElementById('s5-next').style.display='none';
+  document.querySelectorAll('.sky-star').forEach(s=>s.remove());
+  const s5 = document.getElementById('s5');
+  const positions = [
+    {top:'18%',left:'12%'},{top:'25%',left:'55%'},{top:'15%',left:'80%'},
+    {top:'45%',left:'22%'},{top:'40%',left:'65%'},{top:'60%',left:'40%'},
+    {top:'70%',left:'15%'}
+  ];
+  positions.forEach((pos, i) => {
+    const el = document.createElement('div');
+    el.className = 'sky-star';
+    el.textContent = '⭐';
+    el.style.top = pos.top; el.style.left = pos.left;
+    el.style.animationDuration = (1.5 + Math.random()*2) + 's';
+    el.style.animationDelay = (i*.3) + 's';
+    el.addEventListener('click', function(e) { clickStar(this, i, e); });
+    el.addEventListener('touchstart', function(e) { clickStar(this, i, e.touches[0]); }, {passive:true});
+    s5.appendChild(el);
+  });
+}
+
+function clickStar(el, idx, e) {
+  el.textContent = '🌟';
+  el.style.filter = 'drop-shadow(0 0 16px gold)';
+  el.style.cursor = 'default';
+  el.style.pointerEvents = 'none';
+  starsClicked++;
+  const msg = document.createElement('div');
+  msg.className = 'star-msg';
+  msg.textContent = starMessages[idx % starMessages.length];
+  msg.style.left = (e.clientX||e.pageX) - 80 + 'px';
+  msg.style.top  = (e.clientY||e.pageY) - 20 + 'px';
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 2800);
+  spawnSparkle(e.clientX||e.pageX, e.clientY||e.pageY);
+  if (starsClicked >= 5) {
+    document.getElementById('sky-hint').style.opacity='0';
+    setTimeout(()=>{ document.getElementById('s5-next').style.display='block'; },700);
+  }
+}
+
+// ══════════════════════════════════════════
+//  SHAYARI 1 – TYPING
+// ══════════════════════════════════════════
+const sh1Text = "Tum har roz bheja karo ek tasveer apni… 🥀📸\n\nTumhare deedar se meri aankhein bhi muskuraati hain… 💞👀✨";
+let sh1Timer;
+
+function startShayari1() {
+  const el = document.getElementById('sh1-text');
+  const cur = document.getElementById('sh1-cursor');
+  el.textContent = '';
+  document.getElementById('sh1-next').style.display='none';
+  let i = 0;
+  clearInterval(sh1Timer);
+  sh1Timer = setInterval(() => {
+    if (i < sh1Text.length) {
+      const ch = sh1Text[i];
+      el.textContent += ch;
+      i++;
+    } else {
+      clearInterval(sh1Timer);
+      cur.style.display='none';
+      setTimeout(() => { document.getElementById('sh1-next').style.display='block'; }, 1000);
+    }
+  }, 55);
+}
+
+// ══════════════════════════════════════════
+//  SHAYARI 2 – HIDDEN REVEAL
+// ══════════════════════════════════════════
+let sh2Revealed = 0;
+function initShayari2() {
+  sh2Revealed = 0;
+  document.getElementById('sh2-next').style.display='none';
+  document.querySelectorAll('.sh2-line').forEach(l => l.classList.remove('show'));
+  const container = document.getElementById('sh2-hearts');
+  container.innerHTML = '';
+  for(let i=0;i<4;i++){
+    const h = document.createElement('div');
+    h.className='reveal-heart';
+    h.textContent=['💞','💕','🩷','💗'][i];
+    h.style.animationDelay = (i*.3)+'s';
+    h.addEventListener('click', function(){ revealLine(this, i); });
+    h.addEventListener('touchstart', function(e){ revealLine(this, i); }, {passive:true});
+    container.appendChild(h);
+  }
+}
+
+function revealLine(el, idx) {
+  if(el.classList.contains('revealed')) return;
+  el.classList.add('revealed');
+  const line = document.getElementById('sh2-l'+idx);
+  if(line){ line.classList.add('show'); }
+  sh2Revealed++;
+  spawnSparkle(el.getBoundingClientRect().left+16, el.getBoundingClientRect().top+16);
+  if(sh2Revealed>=4){
+    setTimeout(()=>{ document.getElementById('sh2-next').style.display='block'; },700);
+  }
+}
+
+// ══════════════════════════════════════════
+//  SHAYARI 3 – FLOATING WORDS
+// ══════════════════════════════════════════
+function initShayari3() {
+  document.getElementById('sh3-full').classList.remove('show');
+  document.getElementById('sh3-next').style.display='none';
+  const words = ['Khwahish…','naseeb…','Waqt…','kareeb…','💞','🌙','✨','🥀'];
+  const container = document.getElementById('sh3-words');
+  container.innerHTML='';
+  const positions = [
+    {top:'10%',left:'5%'},{top:'20%',left:'55%'},{top:'50%',left:'10%'},
+    {top:'60%',left:'60%'},{top:'5%',left:'75%'},{top:'70%',left:'30%'},
+    {top:'35%',left:'80%'},{top:'40%',left:'35%'}
+  ];
+  words.forEach((w,i)=>{
+    const el = document.createElement('div');
+    el.className='float-word';
+    el.textContent=w;
+    el.style.top=positions[i].top; el.style.left=positions[i].left;
+    el.style.animationDuration=(2+Math.random()*2)+'s';
+    el.style.animationDelay=(i*.2)+'s';
+    container.appendChild(el);
+  });
+  container.addEventListener('click', revealShayari3);
+  container.addEventListener('touchstart', revealShayari3, {passive:true});
+}
+
+let sh3Done=false;
+function revealShayari3() {
+  if(sh3Done) return;
+  sh3Done=true;
+  const words = document.querySelectorAll('.float-word');
+  words.forEach((w,i)=>{
+    setTimeout(()=>{ w.style.opacity='0'; w.style.transition='opacity .3s'; },i*100);
+  });
+  setTimeout(()=>{
+    document.getElementById('sh3-full').classList.add('show');
+    setTimeout(()=>{ document.getElementById('sh3-next').style.display='block'; },800);
+  },1000);
+}
+
+// ══════════════════════════════════════════
+//  CONFETTI
+// ══════════════════════════════════════════
+function launchConfetti() {
+  const emojis = ['💞','💕','🌸','✨','💖','🌟','🥳','💗'];
+  for(let i=0;i<40;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='confetti-piece';
+      el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+      el.style.left=Math.random()*100+'vw';
+      el.style.fontSize=(.8+Math.random()*.8)+'rem';
+      el.style.animationDuration=(2+Math.random()*2)+'s';
+      el.style.animationDelay=Math.random()*.5+'s';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),4000);
+    },i*60);
+  }
+}
+
+// ══════════════════════════════════════════
+//  PLAY AGAIN
+// ══════════════════════════════════════════
+function playAgain() {
+  sh3Done=false;
+  goTo('s0');
+  document.getElementById('progress-bar').style.width='0%';
+  document.getElementById('level-badge').style.display='none';
+  // reset boxes
+  document.querySelectorAll('.gift-box').forEach(b=>{
+    b.classList.remove('opened');
+    b.querySelector('.box-message').style.opacity='0';
+    b.querySelector('.box-icon').style.display='';
+  });
+  // reset feel
+  document.querySelectorAll('.feel-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('feel-response').classList.remove('show');
+  document.getElementById('s3-next').style.display='none';
+  // reset hand
+  document.getElementById('hand-btn').classList.remove('held');
+  document.getElementById('hand-btn').textContent='🤍';
+  document.getElementById('hand-message').classList.remove('show');
+  document.getElementById('s4-next').style.display='none';
+}
+
+// ══════════════════════════════════════════
+//  TOUCH SPARKLES
+// ══════════════════════════════════════════
+document.addEventListener('touchstart', e=>{
+  const t=e.touches[0];
+  spawnSparkle(t.clientX, t.clientY);
+},{passive:true});
+
+// Scheduleloop must be accessible globally for unmute
+function scheduleLoop(t) {
+  // Stub — actual loop handled inside initAudio closure
+}
+</script>
+</body>
+</html>
